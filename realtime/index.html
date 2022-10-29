@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>SAMSCLUB.COM Real-time Sales</title>
+<link rel="stylesheet" type="text/css" href="css/style.css" />
+<link rel="stylesheet" href="css/export.css" type="text/css" media="all" />
+<script type="text/javascript" src="jslib/jquery.min.js"></script>
+<script src="jslib/jquery-1.12.4.js"></script>
+<script src="jslib/jquery-ui.js"></script>
+
+<script src="jslib/amcharts.js"></script>
+<script src="jslib/serial.js"></script>
+<script src="jslib/light.js"></script>
+<script src="js/charts.js"></script>
+
+</head>
+
+<body>
+
+<!-- Header Styles Start -->
+<div class="logo" title="GIST">
+  <img src="../sams_realtime/img/GISBars.JPG">
+</div>
+<div class="header">
+<div class="header-Header-wrapper">
+<div class="header-HeaderPrimary">
+<div class="ResponsiveContainer">
+<div class="arrange">
+<div class="arrange-fit">
+
+</div>
+<div class="arrange-fit"> 
+<label>Samsclub.com Realtime Sales</label> </div>
+<p style="text-align:right;"><img src="../sams_realtime/img/samsclub.jpeg" height="50px" width="70px"></p>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Header Styles End -->
+
+<!-- Center Content Starts -->
+	<div id="main" style="float:left;">
+	
+	<ul id="navigationMenu">
+	    
+	    <li>
+		     <a class="services" target="_blank" href="https://gist.wal-mart.com/views/SamsclubHourly/HourlySales">
+	            <span>Hourly Report</span>
+	         </a>
+	    </li>
+	    
+	    <li>
+	    	<a class="portfolio"  target="_blank" href="https://gistportal.walmart.com">
+	            <span>GIS Portal</span>
+	        </a>
+	    </li>
+	    
+	    <li>
+	    	<a class="contact" href="mailto:GECGISSA32@email.wal-mart.com?Subject=Realtime Reports">
+	            <span>Contact us</span>
+	        </a>
+	    </li>
+	</ul>
+	    
+	</div>
+
+  <div class="container">
+
+     <div class="totalHeader">
+
+     <div class="totalSales" id="totalSales">
+     	<div class="classpng" id="salespng"></div>
+     	<label id="label2"> Placed Sales </label>
+
+     	<div class="salesTop">
+     	<div id="sales1_time" class="timings"> 
+     	<label class="headNum"> Today </label>
+     		<div id="sales1">
+     		</div>
+     		</div>
+
+     		<div class="timings"> 
+     		<label id="salesHead" class="headNum"> Last Minute </label>
+     			<div id="sales2">
+     	</div>
+     	</div>
+
+     </div>
+     </div>
+
+    <div class="totalPlace" id="totalPlace">
+        <div class="classpng" id="orderspng"></div>
+          <label id="label1"> Placed Orders </label>
+
+        <div class="orderTop">
+
+         <div id="order1_time" class="timings">
+                <label class="headNum"> Today </label>
+                <div id="order1">
+                </div>
+             </div>
+
+                <div class="timings">
+                <label class="headNum"> Last Minute </label>
+                <div id="order2">
+                </div>
+             </div>
+        </div>
+     </div>
+
+     </div>
+     </div>
+
+  <div class="first" id="first">
+   <div class="allCharts"> Placed Sales </div>
+         <div id="chartdiv"></div> </div>
+
+    <div class="second" id="second"> 
+    <div class="allCharts"> Placed Orders
+        </div>
+        <div id="chartdiv1"></div>
+    </div>
+    
+      <div class="third" id="third"> 
+        <div class="allCharts"> Placed Sales by Channel
+        </div>
+        <div id="chartdiv3"></div>
+             <div id="chart3Filter">
+  	  <label class="svcFilter"><input type="checkbox" value="8" checked="checked" class="filter3-position" /> Online </label>
+	  <label class="svcFilter"><input type="checkbox" value="9"   class="filter3-position" /> Club Pickup </label>
+	  <label class="svcFilter"><input type="checkbox" value="10"  class="filter3-position" /> Auction</label>  
+          <label class="svcFilter"><input type="checkbox" value="11"  class="filter3-position" /> Other</label>
+        </div> 
+      </div>
+
+        <div class="fourth" id="fourth"> 
+        <div class="allCharts"> Placed Orders by Channel
+        </div>
+        <div id="chartdiv4"></div>
+
+        <div id="chart4Filter"> 
+  	  <label class="svcFilter"><input type="checkbox" value="8"  checked="checked"  class="filter4-position" /> Online </label>
+	  <label class="svcFilter"><input type="checkbox" value="9"  class="filter4-position" /> Club Pickup </label>
+	  <label class="svcFilter"><input type="checkbox" value="10" class="filter4-position" /> Auction </label>	  
+          <label class="svcFilter"><input type="checkbox" value="11" class="filter4-position" /> Other </label>	  
+        </div> 
+        </div>
+       
+<div class="nearRealtime">     
+<iframe id="tableau" scrolling="no" src="https://gist.wal-mart.com/views/SamsclubHourly/HourlySales?:embed=y&:refresh=yes&:refresh=yes&:display_count=no&:toolbar=no&:tabs=no">
+</iframe>
+</div>   
+
+<!-- Center Content Ends -->
+
+</body>
+</html>

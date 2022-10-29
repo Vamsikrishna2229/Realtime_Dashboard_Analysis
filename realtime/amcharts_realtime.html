@@ -1,0 +1,237 @@
+<!-- Styles -->
+<style>
+html, body {
+  width: 1000px;
+  height: 500px;
+  margin: 0px;
+}
+
+#chartdiv {
+	width: 100%;
+	height: 100%;
+}
+
+#chartdiv1 {
+	width: 100%;
+	height: 100%;
+}
+												
+</style>
+
+<!-- Resources -->
+<script src="//www.amcharts.com/lib/3/amcharts.js"></script>
+<script src="//www.amcharts.com/lib/3/serial.js"></script>
+<script src="//www.amcharts.com/lib/3/themes/light.js"></script>
+
+<div id="chartdiv"></div>
+<link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
+<script type="text/javascript" src="jslib/jquery.min.js"></script>
+<script src="jslib/jquery-1.12.4.js"></script>
+<script src="jslib/jquery-ui.js"></script>
+
+<!-- Chart code -->
+
+<script>
+
+var json=[];
+var json1=[];
+$(document).ready(function() {
+
+	json = (function () {
+	    var json = null;
+	    $.ajax({
+	        'async': false,
+	        'global': false,
+	        'url': "json/placed.json",
+	        'dataType': "json",
+	        'success': function (data) {
+	            json = data;
+	        }
+	    });
+	    return json;
+	})();
+
+	json1 = (function () {
+	    var json1 = null;
+	    $.ajax({
+	        'async': false,
+	        'global': false,
+	        'url': "json/placed.json",
+	        'dataType': "json",
+	        'success': function (data) {
+	            json1 = data;
+	        }
+	    });
+	    return json1;
+	})();
+	//console.log(JSON.stringify(json));
+
+/**
+ * Init some variables for demo purposes
+ */
+ //console.log(JSON.stringify(json));	
+var day = 0;
+var firstDate = new Date();
+//alert(firstDate);
+firstDate.setDate( firstDate.getDate() - 500 );
+
+//alert(firstDate);
+//alert(firstDate.setDate( firstDate.getDate() - 500 ));
+
+//var json = require('./PlacedOrders.json');
+//alert(json);
+/**
+ * Create the chart
+ */
+ 
+var chart = AmCharts.makeChart( "chartdiv", {
+  "type": "serial",
+  "theme": "light",
+  "zoomOutButton": {
+    "backgroundColor": '#000000',
+    "backgroundAlpha": 0.15
+  },
+  //"dataProvider": generateChartData(),
+  //"dataProvider": [{"date":"2016-11-09 21:53","TY":125.0,"LY":"97.0"},{"date":"2016-11-09 21:55","TY":146.0,"LY":"104.0"}],
+  "dataProvider": json,                 	  
+  "categoryField": "Date",
+  "categoryAxis": {
+    "parseDates": true,
+    "minPeriod": "mm",
+    "dashLength": 1,
+    "gridAlpha": 0.15,
+    "axisColor": "#DADADA"
+  },
+  "graphs": [ {
+    "id": "g1",
+    "valueField": "TYSALES",
+    "bullet": "round",
+    "bulletBorderColor": "#FFFFFF",
+    "bulletBorderThickness": 20,
+    "lineThickness": 2,
+    "lineColor": "#b5030d",
+    "negativeLineColor": "#0352b5",
+    "hideBulletsCount": 50,
+    "type": "smoothedLine"
+  } ],
+  "chartCursor": {
+	"categoryBalloonDateFormat": "JJ:NN, DD MMMM",
+    "cursorPosition": "mouse"
+  },
+  "chartScrollbar": {
+    "graph": "g1",
+    "scrollbarHeight": 40,
+    "color": "#FFFFFF",
+    "autoGridCount": true
+  }
+})
+
+var chart1 = 
+  AmCharts.makeChart( "chartdiv1", {
+  "type": "serial",
+  "theme": "light",
+  "zoomOutButton": {
+    "backgroundColor": '#000000',
+    "backgroundAlpha": 0.15
+  },
+  "legend": {
+      "useGraphSettings": true
+  },
+  //"dataProvider": generateChartData(),
+  //"dataProvider": [{"date":"2016-11-09 21:53","TY":125.0,"LY":"97.0"},{"date":"2016-11-09 21:55","TY":146.0,"LY":"104.0"}],
+  "dataProvider": json1,                 	  
+  "categoryField": "Date",
+  "categoryAxis": {
+    "parseDates": true,
+    "minPeriod": "mm",
+    "dashLength": 1,
+    "gridAlpha": 0.15,
+    "axisColor": "#DADADA"
+  },
+  "graphs": [ {
+    "id": "g1",
+    "valueField": "TYSALES",
+    "bullet": "round",
+    "bulletBorderColor": "#FFFFFF",
+    "bulletBorderThickness": 0,
+    "lineThickness": 3,
+    "lineColor": "#FF6600",
+    "negativeLineColor": "#0352b5",
+    "hideBulletsCount": 10,
+    "type": "smoothedLine",
+    "title": "TY"
+  },
+  {
+	    "id": "g2",
+	    "valueField": "LYSALES",
+	    "bullet": "square",
+	    "bulletBorderColor": "#FFFFFF",
+	    "bulletBorderThickness": 0,
+	    "lineThickness": 2,
+	    "lineColor": "#FCD202",
+	    "negativeLineColor": "#0352b5",
+	    "hideBulletsCount": 10,
+	    "type": "smoothedLine",
+	    "title": "LY"
+	  }],
+  "chartCursor": {
+	"categoryBalloonDateFormat": "JJ:NN, DD MMMM",
+    "cursorPosition": "mouse"
+  },
+  "chartScrollbar": {
+    "graph": "g1",
+    "scrollbarHeight": 40,
+    "color": "#FFFFFF",
+    "autoGridCount": true
+  }
+})
+
+/**
+ * Set interval to push new data points periodically
+ */
+// set up the chart to update every second
+setInterval( function() {
+	  // normally you would load new datapoints here,
+	  // but we will just generate some random values
+	  // and remove the value from the beginning so that
+	  // we get nice sliding graph feeling
+
+	  // remove datapoint from the beginning
+	  chart.dataProvider.shift();
+
+	  // add new one at the end
+	  chart.validateData();
+	}, 1000 );
+
+
+setInterval( function() {
+	  // normally you would load new datapoints here,
+	  // but we will just generate some random values
+	  // and remove the value from the beginning so that
+	  // we get nice sliding graph feeling
+
+	var js1 = (function () {
+	    var js1 = null;
+	    $.ajax({
+	        'async': false,
+	        'global': false,
+	        'url': "json/placed.json",
+	        'dataType': "json",
+	        'success': function (data) {
+	            js1 = data;
+	        }
+	    });
+	    return js1;
+	})();	  
+	  // remove datapoint from the beginning
+	  chart1.dataProvider.splice(0,200);
+	  chart1.dataProvider = js1;
+	  chart1.validateData();
+	}, 1000 );
+
+});
+</script>
+
+<!-- HTML -->
+<div id="chartdiv1"></div>	
+<div id="chartdiv"></div>

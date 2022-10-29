@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+  <title>Realtime Dashboard</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <!-- Bootstrap 3.3.6 -->
+  <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="../dist/css/AdminLTE.min.css">
+  <!-- AdminLTE Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
+  <link rel="stylesheet" href="../dist/css/skins/_all-skins.min.css">
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+    
+<title>Real-time Sales</title>
+<link rel="stylesheet" type="text/css" href="css/style.css" />
+<link rel="stylesheet" href="css/export.css" type="text/css" media="all" />
+<script type="text/javascript" src="jslib/jquery.min.js"></script>
+<script src="jslib/jquery-1.12.4.js"></script>
+<script src="jslib/jquery-ui.js"></script>
+
+<script src="jslib/amcharts.js"></script>
+<script src="jslib/serial.js"></script>
+<script src="jslib/light.js"></script>
+<script src="js/charts.js"></script>
+    </META>
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+
+  <header class="main-header">
+
+    <!-- Header Navbar: style can be found in header.less -->
+    <nav class="navbar navbar-static-top">
+      <!-- Sidebar toggle button-->
+      <span id="samsheader">&nbsp;&nbsp;Realtime Sales/Orders - (<script> document.write(new Date().toLocaleDateString()); </script>)</span>
+      <!-- Navbar Right Menu -->
+      <div class="navbar-custom-menu">
+        <ul class="nav navbar-nav">
+          <!-- Messages: style can be found in dropdown.less-->
+          <li class="dropdown messages-menu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            </a>
+          </li>
+        </ul>
+      </div>
+
+    </nav>
+  </header>
+  <!-- Left side column. contains the logo and sidebar -->
+          <aside class="main-sidebar">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+          <!-- Sidebar user panel -->
+          <ul class="sidebar-menu">
+              
+            <!-- GIS DASHBOARDS -->
+              
+            <li class="treeview active">
+              <a href="#">
+                <i class="fa fa-lg fa-fw fa-home"></i> <span>Stores</span>
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              </a>
+              <ul class="treeview-menu">
+                  
+            <li class="treeview active">
+            <a href="#"><i class="ion ion-ios-analytics"></i> <span>Sales/Orders</span>
+            <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
+                <ul class="treeview-menu">
+                <li class="active"><a href="realtime_project.html"><i class="fa fa-check-circle"></i>.COM (min) </a></li>
+                </ul>
+            </li>
+                  
+              </ul>
+            </li>
+              
+          </ul>
+        </section>
+        <!-- /.sidebar -->
+      </aside>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+
+    <!-- Main content -->
+    <section class="content">
+    
+      <div class="row">
+        
+        <div class="col-xs-12">
+          <!-- interactive chart -->
+
+          <!-- /.box -->
+          </div>
+        
+        </div>
+        
+      <div class="row">
+        
+        <div class="col-xs-3">
+          <!-- interactive chart -->
+          <div class="info-box">
+                <span class="info-box-icon bg-aqua"><i class="ion ion-social-usd"></i></span>
+              <span>&nbsp;</span>
+               <div class="info-box-content">
+                <span id="sales1"></span>
+                </div>
+                <!-- /.info-box-content -->
+                </div>
+          <!-- /.box -->
+          </div>
+        
+        <div class="col-xs-3">
+          <!-- interactive chart -->
+          <div class="info-box">
+              <span>&nbsp;</span>
+              <div class="info-box-content">
+                <span id="sales2"></span>
+                </div>
+                <!-- /.info-box-content -->
+                </div>
+          <!-- /.box -->
+          </div>
+        
+        <div class="col-xs-3">
+          <!-- interactive chart -->
+          <div class="info-box">
+                <span class="info-box-icon bg-green"><i class="ion ion-ios-cart-outline"></i></span>
+                
+                <span>&nbsp;</span>
+
+                <div class="info-box-content">
+                <span id="order1"></span>
+                </div>
+                <!-- /.info-box-content -->
+                </div>
+        </div>
+        
+        <div class="col-xs-3">
+          <!-- interactive chart -->
+          <div class="info-box">
+
+                <span>&nbsp;</span>
+                <div class="info-box-content">
+                <span id="order2"></span>
+                </div>
+                <!-- /.info-box-content -->
+                </div>
+        </div>
+        
+        </div>
+        
+      <div class="row">
+        
+        <div class="col-xs-6">
+          <!-- interactive chart -->
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <i class="fa fa-bar-chart-o"></i>
+
+              <h3 class="box-title">Placed Sales</h3>
+
+            </div>
+            <div class="box-body">
+              <div id="chartdiv" style="height: 300px;"></div>
+            </div>
+            <!-- /.box-body-->
+          </div>
+          <!-- /.box -->
+
+        </div>
+          
+        <div class="col-xs-6">
+          <!-- interactive chart -->
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <i class="fa fa-bar-chart-o"></i>
+
+              <h3 class="box-title">Placed Orders</h3>
+            </div>
+            <div class="box-body">
+              <div id="chartdiv1" style="height: 300px;"></div>
+            </div>
+            <!-- /.box-body-->
+          </div>
+          <!-- /.box -->
+
+        </div>
+        
+        <div class="col-xs-6">
+          <!-- interactive chart -->
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <i class="fa fa-bar-chart-o"></i>
+
+              <h3 class="box-title">Placed Sales By Channel</h3>
+                
+            </div>
+            <div class="box-body">
+              <div id="chartdiv3" style="height: 300px;"></div>
+              <div id="chart3Filter">
+  	  <label class="svcFilter"><input type="checkbox" value="8" checked="checked" class="filter3-position" /> Online </label>
+	  <label class="svcFilter"><input type="checkbox" value="9"   class="filter3-position" /> Club Pickup </label>
+	  <label class="svcFilter"><input type="checkbox" value="10"  class="filter3-position" /> Auction</label>  
+          <label class="svcFilter"><input type="checkbox" value="11"  class="filter3-position" /> Other</label>
+        </div> 
+            </div>
+            <!-- /.box-body-->
+          </div>
+          <!-- /.box -->
+
+        </div>
+        
+        <div class="col-xs-6">
+          <!-- interactive chart -->
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <i class="fa fa-bar-chart-o"></i>
+
+              <h3 class="box-title">Placed Orders by Channel</h3>
+
+            </div>
+            <div class="box-body">
+              <div id="chartdiv4" style="height: 300px;"></div>
+              <div id="chart4Filter"> 
+  	  <label class="svcFilter"><input type="checkbox" value="8"  checked="checked"  class="filter4-position" /> Online </label>
+	  <label class="svcFilter"><input type="checkbox" value="9"  class="filter4-position" /> Club Pickup </label>
+	  <label class="svcFilter"><input type="checkbox" value="10" class="filter4-position" /> Auction </label>	  
+          <label class="svcFilter"><input type="checkbox" value="11" class="filter4-position" /> Other </label>	  
+        </div> 
+            </div>
+            <!-- /.box-body-->
+          </div>
+          <!-- /.box -->
+
+        </div>
+        
+        <div class="col-xs-12">
+          <!-- interactive chart -->
+          <div class="box box-primary">
+            <div class="box-body" style="height: 900px;width: 250">  
+            
+            </div>
+            <!-- /.box-body-->
+          </div>
+          <!-- /.box -->
+
+        </div>
+          
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+        
+    </section>
+    <!-- /.content -->
+
+  </div>
+
+  <!-- /.control-sidebar -->
+  <!-- Add the sidebar's background. This div must be placed
+       immediately after the control sidebar -->
+  <div class="control-sidebar-bg"></div>
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery 2.2.3 -->
+<script src="../plugins/jQuery/jquery-2.2.3.min.js"></script>
+<!-- Bootstrap 3.3.6 -->
+<script src="../bootstrap/js/bootstrap.min.js"></script>
+<!-- FastClick -->
+<script src="../plugins/fastclick/fastclick.js"></script>
+<!-- AdminLTE App -->
+<script src="../dist/js/app.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="../dist/js/demo.js"></script>
+<!-- FLOT CHARTS -->
+<script src="../plugins/flot/jquery.flot.min.js"></script>
+<!-- FLOT RESIZE PLUGIN - allows the chart to redraw when the window is resized -->
+<script src="../plugins/flot/jquery.flot.resize.min.js"></script>
+<!-- FLOT PIE PLUGIN - also used to draw donut charts -->
+<script src="../plugins/flot/jquery.flot.pie.min.js"></script>
+<!-- FLOT CATEGORIES PLUGIN - Used to draw bar charts -->
+<script src="../plugins/flot/jquery.flot.categories.min.js"></script>
+</body>
+</html>
